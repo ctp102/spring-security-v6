@@ -16,7 +16,9 @@ public class SecurityConfig {
         // HttpSecurity 객체는 HttpSecurityConfiguration.httpSecurity()에서 생성된 빈을 주입 받는다
 
         http
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/login").permitAll()
+                        .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/loginPage")
                         .loginProcessingUrl("/loginProc")
@@ -32,7 +34,18 @@ public class SecurityConfig {
                             System.out.println("exception: " + exception.getMessage());
                             response.sendRedirect("/login");
                         })
-                        .permitAll()
+                        .permitAll())
+                .exceptionHandling(exception -> exception
+                        // authenticationEntryPoint :: '인증되지 않은 사용자'가 보호된 리소스에 접근할 때 어떻게 응답할지 정의하는 클래스
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            System.out.println("exception: " + authException.getMessage());
+                            response.sendRedirect("/login");
+                        })
+                        // accessDeniedHandler :: '인증은 되었지만, 권한이 없는 사용자'가 보호된 리소스에 접근할 때 어떻게 응답할지 정의하는 클래스
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            System.out.println("exception: " + accessDeniedException.getMessage());
+                            response.sendRedirect("/denied");
+                        })
                 );
 
         // 이 시점에 http 객체는 여러 개의 configurer 객체들을 갖고 있는 상태이다.
