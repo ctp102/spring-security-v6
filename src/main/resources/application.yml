@@ -1,0 +1,23 @@
+#springdoc:
+#  api-docs:
+#    path: /v3/api-docs    # OpenAPI ?? ??
+#  swagger-ui:
+#    path: /swagger-ui.html # Swagger UI ?? ??
+#    operations-sorter: method
+#    tags-sorter: alpha
+#    display-request-duration: true
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs  # OpenAPI ?? ?? (?????? ????? ???)
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method       # ??? ?? ???? ??
+    tags-sorter: alpha              # ?? ?? ???? ??
+    display-request-duration: true  # ?? ?? ??
+    doc-expansion: none             # ?? ?? ?? (none | list | full)
+    defaultModelsExpandDepth: -1    # ?? ?? ??? ??
+    persist-authorization: true     # ?? ?? (?? ?? ? ??)
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json

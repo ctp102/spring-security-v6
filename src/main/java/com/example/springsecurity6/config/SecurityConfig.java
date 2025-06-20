@@ -10,6 +10,17 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//                .csrf(csrf -> csrf.disable()) // CSRF 비활성화 (API 서버에선 일반적으로 필요 없음)
+//                .authorizeHttpRequests(auth -> auth
+//                        .anyRequest().permitAll() // 모든 요청 허용
+//                );
+//
+//        return http.build();
+//    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
